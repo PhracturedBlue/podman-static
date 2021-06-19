@@ -26,8 +26,9 @@ RUN git clone -c 'advice.detachedHead=false' --branch ${BATS_VERSION} https://gi
 # podman (without systemd support)
 FROM podmanbuildbase AS podman
 RUN apk add --update --no-cache tzdata curl
-ARG PODMAN_VERSION=v3.2.1
-RUN git clone -c 'advice.detachedHead=false' --branch ${PODMAN_VERSION} https://github.com/containers/podman src/github.com/containers/podman
+#ARG PODMAN_VERSION=v3.2.1
+#RUN git clone -c 'advice.detachedHead=false' --branch ${PODMAN_VERSION} https://github.com/containers/podman src/github.com/containers/podman
+RUN git clone -c 'advice.detachedHead=false' --branch fix-dns-detection https://github.com/mgoltzsche/libpod src/github.com/containers/podman
 WORKDIR $GOPATH/src/github.com/containers/podman
 RUN make install.tools
 RUN set -ex; \
